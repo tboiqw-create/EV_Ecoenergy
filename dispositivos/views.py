@@ -1,7 +1,7 @@
-from django.http import HttpResponse
+from django.http import Http404
 from django.shortcuts import render
 
-from dispositivos.services import cargar_dispositivos
+from dispositivos.services import cargar_dispositivos, cargar_zonas, obtener_zona
 
 
 def inicio(request):
@@ -9,6 +9,7 @@ def inicio(request):
         "sistema": "EcoEnergy",
         "mensaje": "Monitoreo energético responsable",
         "asignatura": "Programación Back End",
+        "zonas": [obtener_zona(zona["id"]) for zona in cargar_zonas()],
     }
     return render(
         request,
@@ -18,24 +19,16 @@ def inicio(request):
 
 
 def dispositivos_zona(request, zona_id):
-    if zona_id != 3:
-        return HttpResponse("Zona no encontrada", status=404)
-
-    dispositivos = cargar_dispositivos()
-    total_consumo = sum(item.get("consumo_kwh", 0) for item in dispositivos)
-    cantidad = len(dispositivos)
-    estado = (
-        "Activo"
-        if any(item.get("estado") == "Activo" for item in dispositivos)
-        else ("Inactivo" if dispositivos else "Vacío")
-    )
+    zona = obtener_zona(zona_id)
+    if zona is None:
+        raise Http404("Zona no encontrada")
 
     contexto = {
-        "zona": f"Zona {zona_id}",
-        "dispositivos": dispositivos,
-        "total_consumo": total_consumo,
-        "cantidad": cantidad,
-        "estado": estado,
+        "zona": zona,
+        "dispositivos": zona["dispositivos"],
+        "total_consumo": zona["total_consumo"],
+        "cantidad": zona["cantidad"],
+        "estado": zona["estado"],
     }
 
     return render(request, "dispositivos/detalle_zona.html", contexto)
@@ -43,13 +36,12 @@ def dispositivos_zona(request, zona_id):
 
 def catalogo(request):
     dispositivos = cargar_dispositivos()
-
-    activos = sum(1 for item in dispositivos if item["estado"] == "Activo")
+    consumo_total = sum(item.get("consumo_kwh", 0) for item in dispositivos)
 
     contexto = {
         "dispositivos": dispositivos,
         "total": len(dispositivos),
-        "total_activos": activos,
+        "consumo_total": consumo_total,
     }
 
     return render(request, "dispositivos/catalogo.html", contexto)

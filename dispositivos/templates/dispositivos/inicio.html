@@ -3,21 +3,35 @@
 {% block title %}Inicio | EcoEnergy{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <div class="card shadow-sm border-0">
-                <div class="card-body p-4 p-md-5">
-                    <p class="text-uppercase text-primary fw-semibold mb-2">EcoEnergy</p>
-                    <h1 class="display-6 fw-bold mb-3">{{ sistema }}</h1>
-                    <p class="lead text-muted mb-4">{{ mensaje }}</p>
-                    <div class="d-flex align-items-center">
-                        <span class="badge bg-light text-dark border">Curso</span>
-                        <p class="mb-0 ms-3">{{ asignatura }}</p>
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-1">Zonas de consumo</h1>
+            <p class="text-muted mb-0">Consulta el consumo y el estado de cada zona.</p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        {% for zona in zonas %}
+            <div class="col-md-6 col-xl-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h2 class="h5">{{ zona.nombre }}</h2>
+                        <dl class="row mb-4">
+                            <dt class="col-7">Límite</dt>
+                            <dd class="col-5 text-end">{{ zona.limite_kwh }} kWh</dd>
+                            <dt class="col-7">Dispositivos</dt>
+                            <dd class="col-5 text-end">{{ zona.cantidad }}</dd>
+                        </dl>
+                        <a class="btn btn-primary" href="{% url 'dispositivos:por_zona' zona.id %}">
+                            Ver detalle
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
+        {% empty %}
+            <div class="col-12"><p>No hay zonas registradas.</p></div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

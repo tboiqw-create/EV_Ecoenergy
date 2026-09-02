@@ -26,9 +26,40 @@ def cargar_dispositivos():
     return cargar_json("dispositivos.json")
 
 
-zonas = cargar_json("zonas.json")
-categorias = cargar_json("categorias.json")
-dispositivos = cargar_dispositivos()
+def cargar_zonas():
+    return cargar_json("zonas.json")
+
+
+def cargar_categorias():
+    return cargar_json("categorias.json")
+
+
+def obtener_zona(zona_id):
+    zona = buscar_por_id(cargar_zonas(), zona_id)
+    if zona is None:
+        return None
+
+    categorias = {categoria["id"]: categoria for categoria in cargar_categorias()}
+    dispositivos = [
+        dict(
+            dispositivo,
+            categoria_nombre=categorias.get(
+                dispositivo.get("categoria_id"), {}
+            ).get("nombre", "Sin categoría"),
+        )
+        for dispositivo in cargar_dispositivos()
+        if dispositivo.get("zona_id") == zona_id
+    ]
+    total_consumo = sum(dispositivo.get("consumo_kwh", 0) for dispositivo in dispositivos)
+    limite = zona.get("limite_kwh", 0)
+
+    return {
+        **zona,
+        "dispositivos": dispositivos,
+        "cantidad": len(dispositivos),
+        "total_consumo": total_consumo,
+        "estado": "ALERTA" if total_consumo > limite else "NORMAL",
+    }
 
 
 def buscar_por_id(coleccion, identificador):

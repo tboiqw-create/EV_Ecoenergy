@@ -1,14 +1,58 @@
 [
     {
         "id": 1,
-        "nombre": "Medidor inteligente",
-        "estado": "Activo",
-        "consumo_kwh": 18.4
+        "nombre": "Iluminacion oficina 1",
+        "consumo_kwh": 18.4,
+        "zona_id": 1,
+        "categoria_id": 1
     },
     {
         "id": 2,
-        "nombre": "Climatizador",
-        "estado": "Revisión",
-        "consumo_kwh": 32.7
+        "nombre": "Climatizador oficina 1",
+        "consumo_kwh": 32.7,
+        "zona_id": 1,
+        "categoria_id": 2
+    },
+    {
+        "id": 3,
+        "nombre": "Computador recepcion",
+        "consumo_kwh": 12.5,
+        "zona_id": 1,
+        "categoria_id": 3
+    },
+    {
+        "id": 4,
+        "nombre": "Motor de ensamblaje",
+        "consumo_kwh": 85.6,
+        "zona_id": 2,
+        "categoria_id": 2
+    },
+    {
+        "id": 5,
+        "nombre": "Compresor industrial",
+        "consumo_kwh": 110.2,
+        "zona_id": 2,
+        "categoria_id": 2
+    },
+    {
+        "id": 6,
+        "nombre": "Iluminacion de planta",
+        "consumo_kwh": 42.8,
+        "zona_id": 2,
+        "categoria_id": 1
+    },
+    {
+        "id": 7,
+        "nombre": "Camara de seguridad",
+        "consumo_kwh": 8.9,
+        "zona_id": 2,
+        "categoria_id": 3
+    },
+    {
+        "id": 8,
+        "nombre": "Refrigerador de muestras",
+        "consumo_kwh": 27.3,
+        "zona_id": 2,
+        "categoria_id": 2
     }
 ]

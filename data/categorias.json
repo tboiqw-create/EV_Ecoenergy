@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "nombre": "Iluminacion",
+        "descripcion": "Dispositivos destinados a iluminar los espacios de trabajo."
+    },
+    {
+        "id": 2,
+        "nombre": "Climatizacion",
+        "descripcion": "Equipos que regulan la temperatura y las condiciones ambientales."
+    },
+    {
+        "id": 3,
+        "nombre": "Tecnologia",
+        "descripcion": "Equipos electronicos utilizados para operar y supervisar la empresa."
+    }
+]

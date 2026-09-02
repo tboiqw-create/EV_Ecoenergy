@@ -1,0 +1,17 @@
+[
+	{
+		"id": 1,
+		"nombre": "Oficinas administrativas",
+		"limite_kwh": 150.0
+	},
+	{
+		"id": 2,
+		"nombre": "Area de produccion",
+		"limite_kwh": 200.0
+	},
+	{
+		"id": 3,
+		"nombre": "Almacen",
+		"limite_kwh": 100.0
+	}
+]
