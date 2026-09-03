@@ -3,59 +3,41 @@
 {% block title %}Detalle de zona | EcoEnergy{% endblock %}
 
 {% block content %}
-<div class="container py-4">
+<div class="container py-3">
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
         <div>
-            <h1 class="h3 mb-1">{{ zona.nombre }}</h1>
-            <p class="text-muted mb-0">Límite: {{ zona.limite_kwh }} kWh</p>
+            <h1 class="h3 mb-1 text-uppercase">Detalle de zona: {{ zona.nombre }}</h1>
         </div>
+        <a class="btn btn-sm btn-outline-dark mt-3 mt-md-0" href="{% url 'dispositivos:inicio' %}">Volver al listado</a>
     </div>
 
-    <div class="row g-4 mb-4">
-        <div class="col-md-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div>
-                            <p class="text-muted small mb-1">Cantidad</p>
-                            <h2 class="mb-0">{{ cantidad }}</h2>
-                        </div>
-                        <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-3">
-                            <i class="bi bi-collection fs-4"></i>
-                        </div>
-                    </div>
-                </div>
+    <div class="row g-0 mb-4 text-center">
+        <div class="col-md-3">
+            <div class="metric-card p-3">
+                <div class="fw-semibold">Límite</div>
+                <strong>{{ zona.limite_kwh }} kWh</strong>
             </div>
         </div>
-
-        <div class="col-md-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div>
-                            <p class="text-muted small mb-1">Consumo total</p>
-                            <h2 class="mb-0">{{ total_consumo }} kWh</h2>
-                        </div>
-                        <div class="bg-success bg-opacity-10 text-success rounded-circle p-3">
-                            <i class="bi bi-lightning-charge fs-4"></i>
-                        </div>
-                    </div>
-                </div>
+        <div class="col-md-3">
+            <div class="metric-card p-3">
+                <div class="fw-semibold">Consumo total</div>
+                <strong>{{ total_consumo }} kWh</strong>
             </div>
         </div>
-
-        <div class="col-md-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body">
-                    <p class="text-muted small mb-1">Estado de la zona</p>
+        <div class="col-md-3">
+            <div class="metric-card p-3">
+                <div class="fw-semibold">Dispositivos</div>
+                <strong>{{ cantidad }}</strong>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="metric-card p-3">
+                <div class="fw-semibold">Estado</div>
                     {% if estado == "ALERTA" %}
-                        <h2 class="h4 text-danger"><span aria-hidden="true">!</span> ALERTA</h2>
-                        <p class="mb-0">El consumo supera el límite permitido.</p>
+                        <strong class="text-danger"><span aria-hidden="true">!</span> ALERTA</strong>
                     {% else %}
-                        <h2 class="h4 text-success"><span aria-hidden="true">✓</span> NORMAL</h2>
-                        <p class="mb-0">El consumo está dentro del límite.</p>
+                        <strong class="text-success"><span aria-hidden="true">✓</span> NORMAL</strong>
                     {% endif %}
-                </div>
             </div>
         </div>
     </div>

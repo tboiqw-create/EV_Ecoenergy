@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}No encontrada | EcoEnergy{% endblock %}
+
+{% block content %}
+<div class="container py-5 text-center">
+    <h1 class="h3">Zona no encontrada</h1>
+    <p class="text-muted">La zona solicitada no existe en el registro actual.</p>
+    <a class="btn btn-primary" href="{% url 'dispositivos:inicio' %}">Volver a zonas</a>
+</div>
+{% endblock %}

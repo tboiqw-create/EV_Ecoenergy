@@ -5,15 +5,76 @@
     <meta charset="utf-8">
     <title>{% block title %}EcoEnergy{% endblock %}</title>
     {% bootstrap_css %}
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #111111;
+        }
+
+        .site-header {
+            background-color: #eeeeee;
+            border: 1px solid #999999;
+        }
+
+        .site-header a {
+            color: #111111;
+            text-decoration: none;
+        }
+
+        .site-header a:hover,
+        .site-header a:focus {
+            text-decoration: underline;
+        }
+
+        .sketch-section {
+            border: 1px solid #999999;
+        }
+
+        .sketch-title {
+            border-bottom: 1px solid #999999;
+            padding: .55rem .75rem;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .zone-card {
+            border: 1px solid #999999;
+            border-radius: 0;
+        }
+
+        .metric-card {
+            border: 1px solid #999999;
+            border-radius: 0;
+            min-height: 6rem;
+        }
+
+        .table thead th {
+            background-color: #555555;
+            color: #ffffff;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+    </style>
 </head>
-<body class="container py-4">
-    <nav>
-        <a href="{% url 'dispositivos:inicio' %}">Inicio</a>
-        <a href="{% url 'dispositivos:catalogo' %}">Dispositivos</a>
-    </nav>
+<body>
+    <div class="container py-3">
+        <nav class="site-header px-3 py-2" aria-label="Navegación principal">
+            <strong class="me-3">ECOENERGY</strong>
+            <a class="me-3" href="{% url 'dispositivos:inicio' %}">Inicio</a>
+            <a href="{% url 'dispositivos:inicio' %}">Zonas</a>
+        </nav>
+    </div>
     <main>
         {% block content %}{% endblock %}
     </main>
+    <div class="container">
+        <footer class="border-top mt-4 py-3 text-muted small">
+            Monitoreo de consumo energético
+        </footer>
+    </div>
     {% bootstrap_javascript %}
 </body>
 </html>
