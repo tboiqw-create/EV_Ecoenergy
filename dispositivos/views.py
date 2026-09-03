@@ -45,3 +45,6 @@ def catalogo(request):
     }
 
     return render(request, "dispositivos/catalogo.html", contexto)
+
+
+

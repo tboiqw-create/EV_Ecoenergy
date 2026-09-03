@@ -7,6 +7,7 @@ urlpatterns = [
         path("zonas/<int:zona_id>/dispositivos/",
         views.dispositivos_zona,
         name="por_zona"),
-        path("dispositivos/", views.catalogo, name="catalogo")
+        path("dispositivos/", views.catalogo, name="catalogo"),
+        path("resumen-zonas/", resumen_zonas.html, name="resumen")
 
 ]

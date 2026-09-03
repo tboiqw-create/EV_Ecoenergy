@@ -1,0 +1,76 @@
+
+{% extends 'base.html' %} 
+
+{% block title %}Detalle de zona | EcoEnergy{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-4 text-center">Resumen de Zonas - EV Ecoenergy</h2>
+
+
+    <div class="row text-white text-center mb-5">
+        <div class="col-md-4 mb-3">
+            <div class="card bg-primary shadow-sm p-3">
+                <h5 class="card-title">Cantidad de Zonas</h5>
+                <h3 class="display-6 fw-bold">{{ total_zonas }}</h3>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card bg-success shadow-sm p-3">
+                <h5 class="card-title">Total Dispositivos</h5>
+                <h3 class="display-6 fw-bold">{{ total_dispositivos }}</h3>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card bg-dark shadow-sm p-3">
+                <h5 class="card-title">Consumo Global</h5>
+                <h3 class="display-6 fw-bold">{{ consumo_total_global }} kWh</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-header bg-secondary text-white">
+            <h4 class="mb-0">Detalle y Estado de Consumo por Zona</h4>
+        </div>
+        <div class="card-body table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre de Zona</th>
+                        <th>Dispositivos</th>
+                        <th>Consumo Total (kWh)</th>
+                        <th>Límite (kWh)</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for zona in zonas_resumen %}
+                    <tr>
+                        <td>{{ zona.id }}</td>
+                        <td><strong>{{ zona.nombre }}</strong></td>
+                        <td>{{ zona.cantidad_dispositivos }}</td>
+                        <td>{{ zona.consumo_total }}</td>
+                        <td>{{ zona.limite_kwh }}</td>
+                        <td>
+                            {% if zona.consumo_total <= zona.limite_kwh %}
+                                <span class="badge bg-success p-2">DENTRO DEL LÍMITE</span>
+                            {% else %}
+                                <span class="badge bg-danger p-2">LÍMITE SUPERADO</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">No hay zonas registradas.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
